@@ -4,7 +4,11 @@ class ApplicationController < ActionController::API
   private
 
   def encode_token(payload)
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
+    # Используйте секретный ключ из credentials или секретов Rails
+    secret_key = Rails.application.credentials.secret_key_base ||
+      Rails.application.secret_key_base
+
+    JWT.encode(payload, secret_key)
   end
 
   def decode_token(token)
