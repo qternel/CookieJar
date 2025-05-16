@@ -1,0 +1,103 @@
+.outerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  min-width: 320px; /* добавлено */
+  padding: 2.5rem;
+  background: #2a2a40;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  width: 80px;
+  height: auto;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #f3e5ab;
+  letter-spacing: 0.5px;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background: #373750;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.input:focus {
+  outline: 2px solid #4c8cff;
+  transform: scale(1.02);
+}
+
+.passwordWrapper {
+  position: relative;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.buttonContainer {
+  margin-top: 2rem;
+}
+
+.button {
+  width: 100%;
+  padding: 1rem;
+  background: #d0a76c;
+  color: #2a2a40;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover:enabled {
+  background: #a06b4f;
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
