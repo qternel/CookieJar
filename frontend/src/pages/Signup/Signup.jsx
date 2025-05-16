@@ -5,17 +5,17 @@ import { useNavigate } from 'react-router-dom';
 export default function Signup() {
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-
+  const handleSubmit = async ({ username, password }) => {
     try {
-      const response = await axios.post("http://localhost:3000/signup", data, {
+      await axios.post("http://localhost:3000/signup", {
+        login: username,
+        password,
+        password_confirmation: password
+      }, {
         withCredentials: true
       });
-      console.log("Успешная регистрация!", response.data);
-      navigate("/dashboard");
+
+      navigate("/login");
     } catch (error) {
       console.error("Ошибка регистрации:", error);
     }

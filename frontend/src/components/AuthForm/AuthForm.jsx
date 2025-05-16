@@ -1,12 +1,18 @@
+// AuthForm.jsx
 import styles from "./AuthForm.module.css";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import cookieLogo from "/src/assets/cookie-jar-logo.png";
+import { Link } from "react-router-dom";
 
-export default function AuthForm({ type, onSubmit }) {
+export default function AuthForm({ type, onSubmit, errorMessage }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ username: "", password: "" });
-  
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    passwordConfirmation: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -14,7 +20,8 @@ export default function AuthForm({ type, onSubmit }) {
 
   const isFormValid =
     formData.username.trim().length >= 3 &&
-    formData.password.trim().length >= 6;
+    formData.password.trim().length >= 6 &&
+    (type === "login" || formData.password === formData.passwordConfirmation);
 
   return (
     <div className={styles.outerWrapper}>
@@ -23,7 +30,13 @@ export default function AuthForm({ type, onSubmit }) {
         <h2 className={styles.title}>
           {type === "login" ? "Вход" : "Регистрация"}
         </h2>
-        <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) onSubmit(formData); }}>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (isFormValid) onSubmit(formData);
+          }}
+        >
           <div className={styles.inputGroup}>
             <input
               name="username"
@@ -35,6 +48,7 @@ export default function AuthForm({ type, onSubmit }) {
               className={styles.input}
             />
           </div>
+
           <div className={styles.inputGroup}>
             <div className={styles.passwordWrapper}>
               <input
@@ -56,6 +70,25 @@ export default function AuthForm({ type, onSubmit }) {
               </button>
             </div>
           </div>
+
+          {type === "signup" && (
+            <div className={styles.inputGroup}>
+              <input
+                name="passwordConfirmation"
+                type={showPassword ? "text" : "password"}
+                placeholder="Подтвердите пароль"
+                required
+                value={formData.passwordConfirmation}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+          )}
+
+          {errorMessage && (
+            <div className={styles.error}>{errorMessage}</div>
+          )}
+
           <div className={styles.buttonContainer}>
             <button
               type="submit"
@@ -66,6 +99,18 @@ export default function AuthForm({ type, onSubmit }) {
             </button>
           </div>
         </form>
+
+        <div className={styles.switchLink}>
+          {type === "login" ? (
+            <p>
+              Нет аккаунта? <Link to="/signup">Зарегистрироваться</Link>
+            </p>
+          ) : (
+            <p>
+              Уже есть аккаунт? <Link to="/login">Войти</Link>
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
