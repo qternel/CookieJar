@@ -3,7 +3,7 @@ class AuthController < ApplicationController
 
   def signup
     user = User.new(user_params)
-    user.achievements << "Registered!"
+    user.achievements.build(description: "Registered!", cookie_count: rand(5..20))
     if user.save
       token = encode_token(user_id: user.id)
       render json: { token: token, user_id: user.id }, status: :created

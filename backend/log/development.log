@@ -199,3 +199,607 @@ Processing by AuthController#test_jwt as */*
 Completed 200 OK in 60ms (Views: 0.2ms | ActiveRecord: 5.4ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='CookieJar'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "password_digest" varchar, "achievements" text, "cookies" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login") /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250507200035) /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-05-16 08:37:36.331379', '2025-05-16 08:37:36.331383') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '5b2e5811611915fac3b12297aad0fb8496af0665', '2025-05-16 08:37:36.337506', '2025-05-16 08:37:36.337508') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Migrating to CreateAchievements (20250516083727)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_651a652e8a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250516083727') RETURNING "version" /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Started POST "/auth/signup?Content-Type=application/json" for ::1 at 2025-05-16 11:40:38 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signup as */*
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "Content-Type"=>"application/json", "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+[31mUnpermitted parameters: :user, :Content-Type, :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002a93ef10010>, params: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "Content-Type"=>"application/json", "controller"=>"auth", "action"=>"signup", "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}} }[0m
+Completed 500 Internal Server Error in 231ms (ActiveRecord: 4.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Achievement(#20840) expected, got "Registered!" which is an instance of String(#3040)):
+  
+app/controllers/auth_controller.rb:6:in `signup'
+Started POST "/auth/signup" for ::1 at 2025-05-16 11:42:49 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signup as */*
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+[31mUnpermitted parameters: :user, :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002886b9f5f10>, params: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "controller"=>"auth", "action"=>"signup", "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}} }[0m
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 4.3ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Achievement(#20840) expected, got "Registered!" which is an instance of String(#3040)):
+  
+app/controllers/auth_controller.rb:6:in `signup'
+Started POST "/auth/signup" for ::1 at 2025-05-16 11:43:10 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+[31mUnpermitted parameters: :user, :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000288730fd7c0>, params: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "controller"=>"auth", "action"=>"signup", "auth"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}} }[0m
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Achievement(#20840) expected, got "Registered!" which is an instance of String(#3040)):
+  
+app/controllers/auth_controller.rb:6:in `signup'
+Started POST "/auth/signup" for ::1 at 2025-05-16 11:46:22 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000024c9e357db0>, params: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'testuser' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('testuser', '$2a$12$045cKuKigHdqmkfycmM/NufI84K9/t1v7KDBbMHB311u3AUeo/8fO', NULL, NULL, '2025-05-16 08:46:23.050012', '2025-05-16 08:46:23.050012') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 17, 1, '2025-05-16 08:46:23.054113', '2025-05-16 08:46:23.054113') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+Completed 201 Created in 337ms (Views: 0.2ms | ActiveRecord: 9.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-16 11:47:09 +0300
+Processing by UsersController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in `authorize_request'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user!' for an instance of UsersController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/user/me" for ::1 at 2025-05-16 11:49:57 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as */*
+  Parameters: {"user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in `authorize_request'
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user!' for an instance of UsersController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Started POST "/auth/signup" for ::1 at 2025-05-16 12:00:08 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000021774d25f18>, params: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'testuser' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+Completed 422 Unprocessable Content in 334ms (Views: 0.5ms | ActiveRecord: 6.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-16 12:01:58 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002177c5405c0>, params: {"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"testuser", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'testuser' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+Completed 422 Unprocessable Content in 192ms (Views: 0.1ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-16 12:03:31 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"testuser1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"testuser1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002177c612458>, params: {"login"=>"testuser1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"testuser1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'testuser1' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mUser Create (1.8ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('testuser1', '$2a$12$1aw5Yq..HPB45xrOn0wYReZJDU3ZaNpMVCM9BsdXBfQktQWepYa0C', NULL, NULL, '2025-05-16 09:03:31.874023', '2025-05-16 09:03:31.874023') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 7, 2, '2025-05-16 09:03:31.878609', '2025-05-16 09:03:31.878609') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:7:in `signup'
+Completed 201 Created in 205ms (Views: 0.2ms | ActiveRecord: 5.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-16 12:04:18 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/auth/signin"):
+  
+Started POST "/auth/signin" for ::1 at 2025-05-16 12:04:22 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/auth/signin"):
+  
+Started POST "/auth/signin" for ::1 at 2025-05-16 12:05:55 +0300
+Processing by AuthController#signin as */*
+  Parameters: {"login"=>"testuser1", "password"=>"[FILTERED]", "auth"=>{"login"=>"testuser1", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = 'testuser1' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `signin'
+Completed 200 OK in 193ms (Views: 0.2ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-16 12:06:32 +0300
+Processing by UsersController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in `authorize_request'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user!' for an instance of UsersController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/user/me" for ::1 at 2025-05-16 12:07:19 +0300
+Processing by UsersController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in `authorize_request'
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user' for an instance of UsersController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/user/me" for ::1 at 2025-05-16 12:07:42 +0300
+Processing by UsersController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:40:in `authorize_request'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `current_user' for an instance of UsersController):
+  
+app/controllers/users_controller.rb:5:in `me'
+Started GET "/user/me" for ::1 at 2025-05-16 12:09:51 +0300
+Processing by UsersController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:23:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 2 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 31ms (Views: 0.2ms | ActiveRecord: 2.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/achievements" for ::1 at 2025-05-16 12:10:40 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"achievement"=>{"description"=>"Прочитал 10 страниц"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:23:in `authorize_request'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user!' for an instance of AchievementsController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:43:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started POST "/achievements" for ::1 at 2025-05-16 12:11:04 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"achievement"=>{"description"=>"Прочитал 10 страниц"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:23:in `authorize_request'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user' for an instance of AchievementsController):
+  
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:99:in `method_missing'
+activesupport (8.0.2) lib/active_support/callbacks.rb:361:in `block in make_lambda'
+activesupport (8.0.2) lib/active_support/callbacks.rb:178:in `block in call'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.0.2) lib/active_support/callbacks.rb:179:in `call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `block in invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `each'
+activesupport (8.0.2) lib/active_support/callbacks.rb:559:in `invoke_before'
+activesupport (8.0.2) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.2) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.2) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.14) lib/rack/etag.rb:29:in `call'
+rack (3.1.14) lib/rack/conditional_get.rb:43:in `call'
+rack (3.1.14) lib/rack/head.rb:15:in `call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.14) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.14) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.2) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started POST "/achievements" for ::1 at 2025-05-16 12:11:31 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"achievement"=>{"description"=>"Прочитал 10 страниц"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:23:in `authorize_request'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mAchievement Create (1.7ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Прочитал 10 страниц', 12, 2, '2025-05-16 09:11:32.245121', '2025-05-16 09:11:32.245121') RETURNING "id" /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+Completed 201 Created in 22ms (Views: 0.5ms | ActiveRecord: 5.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
