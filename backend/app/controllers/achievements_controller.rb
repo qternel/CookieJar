@@ -4,7 +4,7 @@ class AchievementsController < ApplicationController
   def create
     achievement = current_user.achievements.new(achievement_params)
     achievement.cookie_count = rand(5..20)
-
+    current_user.update_column(:cookies, current_user.cookies + achievement.cookie_count)
     if achievement.save
       render json: {
         message: "Achievement created!",
@@ -12,7 +12,8 @@ class AchievementsController < ApplicationController
         achievement: achievement
       }, status: :created
     else
-      render json: { errors: achievement.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: { achievement: achievement.errors.full_messages, }
+      }, status: :unprocessable_entity
     end
   end
 

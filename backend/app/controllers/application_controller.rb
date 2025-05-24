@@ -4,7 +4,6 @@ class ApplicationController < ActionController::API
   private
 
   attr_reader :current_user
-  
   def authorize_request
     header = request.headers["Authorization"]
     token = header&.split(" ")&.last
@@ -43,7 +42,7 @@ class ApplicationController < ActionController::API
     decoded = JWT.decode(token, secret_key)[0]
     HashWithIndifferentAccess.new(decoded)
   rescue JWT::ExpiredSignature
-    "the token is expired"
+    "the token has expired"
     nil
   rescue JWT::DecodeError
     "invalid token"
