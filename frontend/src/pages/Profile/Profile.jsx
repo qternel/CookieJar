@@ -1,36 +1,64 @@
-import { useEffect, useState } from "react"; // TODO: Добавить axios при подключении бэкенда
+import { useState } from "react";
 import "./Profile.css";
 
 export default function Profile() {
-  // TODO: Заменить моковые данные на запрос к бэкенду
+  // Состояние профиля
   const [profileData, setProfileData] = useState({
     login: "CookieMaster",
     cookies: 127,
-    joinDate: "2025-05-20T14:30:00Z", // TODO: Получать с бэкенда
-    achievements: [] // TODO: Получать с бэкенда
+    joinDate: "2025-05-20T14:30:00Z",
+    achievements: [
+      { id: 1, description: "Первая печенька", date: "2025-05-21" },
+      { id: 2, description: "Недельный streak", date: "2025-05-28" }
+    ]
   });
 
-  // TODO: Раскомментировать и настроить при подключении бэкенда
-  /*
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get('/api/profile', { 
-          withCredentials: true 
-        });
-        setProfileData(response.data);
-      } catch (error) {
-        console.error('Ошибка загрузки профиля:', error);
-      }
-    };
+  // Состояние для формы
+  const [newAchievement, setNewAchievement] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleAddAchievement = async (e) => {
+    e.preventDefault();
     
-    fetchProfile();
-  }, []);
-  */
+    if (!newAchievement.trim()) {
+      setError("Пожалуйста, опишите достижение");
+      return;
+    }
+
+    setIsAdding(true);
+    
+    try {
+      // TODO: Заменить на реальный запрос к бэкенду
+      console.log("Отправка достижения:", { description: newAchievement });
+      
+      // Моковая обработка (удалить при подключении бэкенда)
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      const newAchievementObj = {
+        id: Date.now(),
+        description: newAchievement,
+        date: new Date().toLocaleDateString()
+      };
+      
+      setProfileData(prev => ({
+        ...prev,
+        achievements: [newAchievementObj, ...prev.achievements]
+      }));
+      
+      setNewAchievement("");
+      setError("");
+    } catch (err) {
+      setError("Ошибка при добавлении");
+      console.error(err);
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
   return (
     <div className="fullscreenProfile">
-      {/* Шапка профиля */}
+      {/* Шапка профиля (на всю ширину) */}
       <div className="profileBanner">
         <div className="bannerContent">
           <div className="avatar">🍪</div>
@@ -53,23 +81,58 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Основной контент */}
-      <div className="fullWidthContent">
-        <h2>Мои достижения</h2>
-        <div className="achievementsContainer">
-          {profileData.achievements.length > 0 ? (
-            profileData.achievements.map((achievement, i) => (
-              <div key={i} className="achievementTile">
-                <div className="achievementEmoji">🏆</div>
-                <div className="achievementText">
-                  <h3>{achievement.description}</h3>
-                  <p>Получено: {achievement.date}</p>
-                </div>
+      {/* Основное содержимое (на всю ширину) */}
+      <div className="profileContent">
+        <div className="contentWrapper">
+          {/* Секция добавления достижения */}
+          <div className="addAchievementSection">
+            <h2 className="sectionTitle">Добавить новое достижение</h2>
+            <form onSubmit={handleAddAchievement} className="addAchievementForm">
+              <div className="formRow">
+                <textarea
+                  value={newAchievement}
+                  onChange={(e) => {
+                    setNewAchievement(e.target.value);
+                    setError("");
+                  }}
+                  placeholder="Опишите ваше достижение..."
+                  className="achievementInput"
+                  disabled={isAdding}
+                  rows="3"
+                />
+                <button 
+                  type="submit" 
+                  className="addButton"
+                  disabled={isAdding || !newAchievement.trim()}
+                >
+                  {isAdding ? "Добавляем..." : "Добавить"}
+                </button>
               </div>
-            ))
-          ) : (
-            <p className="noAchievements">Нет достижений</p>
-          )}
+              {error && <div className="errorMessage">{error}</div>}
+            </form>
+          </div>
+
+          {/* Секция списка достижений */}
+          <div className="achievementsSection">
+            <div className="achievementsHeader">
+              <h2>Мои достижения</h2>
+            </div>
+            <div className="achievementsContainer">
+              {profileData.achievements.length > 0 ? (
+                profileData.achievements.map((achievement) => (
+                  <div key={achievement.id} className="achievementTile">
+                    <div className="achievementEmoji">🏆</div>
+                    <div className="achievementText">
+                      <h3>{achievement.description}</h3>
+                      <p>Получено: {achievement.date}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="noAchievements">Пока нет достижений</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
