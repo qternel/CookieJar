@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_07_200035) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_16_083727) do
+  create_table "achievements", force: :cascade do |t|
+    t.string "description"
+    t.integer "cookie_count"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "login"
     t.string "password_digest"
@@ -20,4 +29,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_200035) do
     t.datetime "updated_at", null: false
     t.index ["login"], name: "index_users_on_login", unique: true
   end
+
+  add_foreign_key "achievements", "users"
 end
