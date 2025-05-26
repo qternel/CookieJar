@@ -2,6 +2,7 @@
 Перед запуском:
 1) bundle install
 2) rails db:migrate
+   
 Запуск: rails server
 
 регистрация на бэкенде(возвращает jwt токен)
