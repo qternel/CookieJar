@@ -1,0 +1,317 @@
+/* Базовые сбросы */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Основные стили */
+.fullscreenProfile {
+  width: 100vw;
+  min-height: 100vh;
+  background: #1e1e2f;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Шапка профиля (на всю ширину) */
+.profileBanner {
+  width: 100vw;
+  background: #2a2a40;
+  padding: 3rem 5vw;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.bannerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Основное содержимое (на всю ширину) */
+.profileContent {
+  width: 100vw;
+  flex: 1;
+  padding: 3rem 5vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Контейнер для ограничения по ширине */
+.contentWrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Секция добавления достижения */
+.addAchievementSection {
+  background: #2a2a40;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #d0a76c;
+  color: #2a2a40;
+  font-size: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #f3e5ab;
+}
+
+.profileBanner h1 {
+  font-size: 2.5rem;
+  color: #f3e5ab;
+  margin: 0;
+}
+
+.profileMeta {
+  color: #aaa;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 0.5rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #d0a76c;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+/* Основное содержимое */
+.fullWidthContent {
+  width: 100%;
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Секция добавления достижения */
+.addAchievementSection {
+  background: #2a2a40;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #f3e5ab;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.sectionTitle::before {
+  content: "+";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #d0a76c;
+  color: #2a2a40;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.addAchievementForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.achievementInput {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #373750;
+  color: #fff;
+  transition: all 0.3s ease;
+  min-height: 60px;
+  resize: vertical;
+}
+
+.achievementInput:focus {
+  outline: 2px solid #d0a76c;
+  box-shadow: 0 0 0 4px rgba(208, 167, 108, 0.2);
+}
+
+.addButton {
+  padding: 1rem 2rem;
+  background: #d0a76c;
+  color: #2a2a40;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  height: 50px;
+}
+
+.addButton:hover:not(:disabled) {
+  background: #c29555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.addButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #f87171;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(248, 113, 113, 0.1);
+  border-radius: 6px;
+}
+
+/* Секция достижений */
+.achievementsSection {
+  margin-top: 1rem;
+}
+
+.achievementsHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.achievementsHeader h2 {
+  font-size: 1.8rem;
+  color: #f3e5ab;
+}
+
+.achievementsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.achievementTile {
+  background: #373750;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  transition: all 0.3s ease;
+  min-height: 120px;
+}
+
+.achievementTile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.achievementEmoji {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.achievementText h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.achievementText p {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.noAchievements {
+  text-align: center;
+  padding: 3rem;
+  color: #aaa;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}
+
+/* Анимация загрузки */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.addButton[disabled] {
+  animation: pulse 1.5s infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+  .profileBanner, .profileContent {
+    padding: 3rem 3vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 3rem;
+  }
+  
+  .profileBanner h1 {
+    font-size: 2rem;
+  }
+  
+  .addAchievementSection {
+    padding: 1.8rem;
+  }
+}
