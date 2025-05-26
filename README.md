@@ -6,6 +6,7 @@
 Запуск: rails server
 
 регистрация на бэкенде(возвращает jwt токен)
+
 post http://localhost:3000/auth/signup 
 {
     "login": "example_user",
@@ -14,6 +15,7 @@ post http://localhost:3000/auth/signup
 }
 
 авторизация на бэкенде(возвращает jwt токен)
+
 post http://localhost:3000/auth/signin
 {
     "login": "example_user",
@@ -21,10 +23,12 @@ post http://localhost:3000/auth/signin
 }
 
 получить информацию о пользователе и его достижениях
+
 get http://localhost:3000/user/me
 (Требуется токен авторизации в заголовке Authorization)
 
 добавить достижение(при успешном добавлении возвращает информацию о достижении)
+
 post http://localhost:3000/achievements
 {
     "description": "cool achievement"
