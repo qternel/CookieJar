@@ -1,6 +1,7 @@
 import styles from "./AuthForm.module.css";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 import cookieLogo from "/src/assets/cookie-jar-logo.png";
 
 export default function AuthForm() {
@@ -13,6 +14,14 @@ export default function AuthForm() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const {
+    signIn,
+    signUp,
+    isLoadingSignIn,
+    isLoadingSignUp,
+    errorSignIn,
+    errorSignUp,
+  } = useAuth();
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -33,7 +42,17 @@ export default function AuthForm() {
 
     setIsLoading(true);
     setErrorMessage("");
+    if (type === "login") {
+      signIn(formData.username, formData.password);
+    } else {
+      signUp(formData.username, formData.password);
+    }
   };
+
+  useEffect(() => {
+    if (type === "login" && errorSignIn) setErrorMessage(errorSignIn);
+    if (type === "signup" && errorSignUp) setErrorMessage(errorSignUp);
+  }, [errorSignIn, errorSignUp, type]);
 
   return (
     <div className={styles.outerWrapper}>
@@ -106,7 +125,7 @@ export default function AuthForm() {
               className={styles.button}
               disabled={!isFormValid || isLoading}
             >
-              {isLoading ? (
+              {isLoadingSignIn || isLoadingSignUp ? (
                 <span className={styles.spinner}></span>
               ) : type === "login" ? (
                 "Войти"
