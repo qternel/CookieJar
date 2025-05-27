@@ -6,7 +6,7 @@ import cookieLogo from "/src/assets/cookie-jar-logo.png";
 
 export default function AuthForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [type, setType] = useState();
+  const [type, setType] = useState("signup");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -43,9 +43,9 @@ export default function AuthForm() {
     setIsLoading(true);
     setErrorMessage("");
     if (type === "login") {
-      signIn(formData.username, formData.password);
+      signIn({ login: formData.username, password: formData.password });
     } else {
-      signUp(formData.username, formData.password);
+      signUp({ login: formData.username, password: formData.password });
     }
   };
 

@@ -17,7 +17,7 @@ export const useAuth = () => {
     error: errorSignUp,
   } = useMutation({
     mutationKey: ["sign up"],
-    mutationFn: (login, password) => SignUp(login, password),
+    mutationFn: ({ login, password }) => SignUp(login, password),
     onSuccess: () => refetchUserInfo(),
   });
 
