@@ -1571,3 +1571,157 @@ Processing by UsersController#me as */*
 Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "password_digest" varchar, "achievements" text, "cookies" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login") /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35mSQL (3.6ms)[0m  [1m[35mPRAGMA foreign_keys /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aachievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aachievements_on_user_id" ON "aachievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aachievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_651a652e8a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250516083727) /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250507200035); /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-05-27 14:01:29.902903', '2025-05-27 14:01:29.902907') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '9237ec4d62d83f1cee011d7e70f0190b494abfb3', '2025-05-27 14:01:29.911955', '2025-05-27 14:01:29.911959') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Started OPTIONS "/auth/signup" for 127.0.0.1 at 2025-05-27 17:03:05 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  
+ActionController::RoutingError (No route matches [OPTIONS] "/auth/signup"):
+  
+Started POST "/auth/signup" for 127.0.0.1 at 2025-05-27 17:13:59 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000219e58d92e8>, params: {"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'test' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('test', '$2a$12$rJaWGOBlmeJKeyg/xuj1Ve2eI59WI.blgQvjPWATV9UWOgWCOn6je', NULL, 10, '2025-05-27 14:14:01.507902', '2025-05-27 14:14:01.507902') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 1, '2025-05-27 14:14:01.512244', '2025-05-27 14:14:01.512244') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 1032ms (Views: 0.2ms | ActiveRecord: 13.4ms (3 queries, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "password_digest" varchar, "achievements" text, "cookies" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login") /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35mSQL (3.4ms)[0m  [1m[35mPRAGMA foreign_keys /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aachievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aachievements_on_user_id" ON "aachievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aachievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_651a652e8a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='CookieJar'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250516083727) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250507200035); /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-05-27 14:18:27.062069', '2025-05-27 14:18:27.062072') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '9237ec4d62d83f1cee011d7e70f0190b494abfb3', '2025-05-27 14:18:27.069933', '2025-05-27 14:18:27.069935') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Started POST "/auth/signin" for ::1 at 2025-05-27 17:19:01 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"test", "password"=>"[FILTERED]", "auth"=>{"login"=>"test", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = 'test' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 401 Unauthorized in 312ms (Views: 0.3ms | ActiveRecord: 3.8ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 17:19:11 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000001f87988fc98>, params: {"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"test", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (5.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'test' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('test', '$2a$12$h0mrf9M86QTAZC6nbofXHeW7GNO2VC81nDcyn..ZfCxqDk.BFWX9u', NULL, 10, '2025-05-27 14:19:12.047718', '2025-05-27 14:19:12.047718') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 1, '2025-05-27 14:19:12.052137', '2025-05-27 14:19:12.052137') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 368ms (Views: 0.2ms | ActiveRecord: 9.2ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 17:29:21 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"testtest1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"testtest1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000001f8783e0f18>, params: {"login"=>"testtest1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"testtest1", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (10.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'testtest1' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('testtest1', '$2a$12$1n1o65p5GFbWySp.TCiHy.I1bGkCG8nR1MixGSHo.WqnsjR5mlNM.', NULL, 10, '2025-05-27 14:29:21.581683', '2025-05-27 14:29:21.581683') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 2, '2025-05-27 14:29:21.587285', '2025-05-27 14:29:21.587285') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 321ms (Views: 0.2ms | ActiveRecord: 12.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
