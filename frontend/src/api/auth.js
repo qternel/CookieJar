@@ -17,13 +17,14 @@ export const SignIn = async (login, password) => {
   return data;
 };
 
-export const SignUp = async (login, password) => {
+export const SignUp = async (login, password, secondPassword) => {
   const { data } = await api({
     method: "post",
     url: `${ENDPOINT}/auth/signup`,
     data: {
       login: login,
       password: password,
+      password_confirmation: secondPassword,
     },
   });
 

@@ -8,7 +8,7 @@ export const useAuth = () => {
     error: errorSignIn,
   } = useMutation({
     mutationKey: ["sign in"],
-    mutationFn: (login, password) => SignIn(login, password),
+    mutationFn: ({ login, password }) => SignIn(login, password),
   });
 
   const {
@@ -17,7 +17,8 @@ export const useAuth = () => {
     error: errorSignUp,
   } = useMutation({
     mutationKey: ["sign up"],
-    mutationFn: ({ login, password }) => SignUp(login, password),
+    mutationFn: ({ login, password, secondPassword }) =>
+      SignUp(login, password, secondPassword),
     onSuccess: () => refetchUserInfo(),
   });
 
