@@ -1,24 +1,49 @@
-# README
+Продукт компании «SSMR Group»
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Описание проекта: 
+Веб-приложение «Cookie Jar»
+(Трекер личных достижений)
+Идея: Веб-приложение, где пользователи отмечают маленькие ежедневные победы (например: «Прочитал 10 страниц», «Пробежал 1 км»), а система «награждает» их виртуальным «печеньем» — внутренней валютой, которую можно будет конвертировать во что-то крутое.
 
-Things you may want to cover:
+Состав команды:
+1. Ростислав Шведов
+2. Михаил Сидорченко
+3. Ростислав Макайда
+4. Денис Рыпунов
 
-* Ruby version
 
-* System dependencies
+# CookieJar
+Перед запуском:
+1) bundle install
+2) rails db:migrate
+   
+Запуск: rails server
 
-* Configuration
+регистрация на бэкенде(возвращает jwt токен)
 
-* Database creation
+post http://localhost:3000/auth/signup 
+{
+    "login": "example_user",
+    "password": "securepassword",
+    "password_confirmation": "securepassword"
+}
 
-* Database initialization
+авторизация на бэкенде(возвращает jwt токен)
 
-* How to run the test suite
+post http://localhost:3000/auth/signin
+{
+    "login": "example_user",
+    "password": "securepassword"
+}
 
-* Services (job queues, cache servers, search engines, etc.)
+получить информацию о пользователе и его достижениях
 
-* Deployment instructions
+get http://localhost:3000/user/me
+(Требуется токен авторизации в заголовке Authorization)
 
-* ...
+добавить достижение(при успешном добавлении возвращает информацию о достижении)
+
+post http://localhost:3000/achievements
+{
+    "description": "cool achievement"
+}
