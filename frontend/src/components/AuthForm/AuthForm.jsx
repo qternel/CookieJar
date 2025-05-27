@@ -45,7 +45,11 @@ export default function AuthForm() {
     if (type === "login") {
       signIn({ login: formData.username, password: formData.password });
     } else {
-      signUp({ login: formData.username, password: formData.password });
+      signUp({
+        login: formData.username,
+        password: formData.password,
+        secondPassword: formData.passwordConfirmation,
+      });
     }
   };
 
