@@ -1,12 +1,11 @@
 import styles from "./AuthForm.module.css";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import cookieLogo from "/src/assets/cookie-jar-logo.png";
-import { Link, useNavigate } from "react-router-dom";
-import api from '../../api/client';
 
-export default function AuthForm({ type }) {
+export default function AuthForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [type, setType] = useState();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -14,55 +13,26 @@ export default function AuthForm({ type }) {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
-  const isFormValid =
-    formData.username.trim().length >= 3 &&
-    formData.password.trim().length >= 6 &&
-    (type === "login" || formData.password === formData.passwordConfirmation);
+  const isFormValid = useMemo(() => {
+    return (
+      formData.username.trim().length >= 3 &&
+      formData.password.trim().length >= 6 &&
+      (type === "login" || formData.password === formData.passwordConfirmation)
+    );
+  }, [formData, type]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid) return;
-    
+
     setIsLoading(true);
     setErrorMessage("");
-
-    try {
-      const endpoint = type === 'login' ? '/auth/signin' : '/auth/signup';
-      const payload = {
-        login: formData.username,
-        password: formData.password
-      };
-      
-      if (type === 'signup') {
-        payload.password_confirmation = formData.passwordConfirmation;
-      }
-
-      const response = await api.post(endpoint, payload);
-      
-      localStorage.setItem('token', response.data.token);
-      if (response.data.user_id) {
-        localStorage.setItem('userId', response.data.user_id);
-      }
-      
-      navigate('/profile'); // Перенаправляем на страницу профиля
-      
-    } catch (error) {
-      console.error('Ошибка авторизации:', error);
-      setErrorMessage(
-        error.response?.data?.error || 
-        error.response?.data?.errors?.join(', ') || 
-        'Произошла ошибка'
-      );
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
@@ -128,9 +98,7 @@ export default function AuthForm({ type }) {
             </div>
           )}
 
-          {errorMessage && (
-            <div className={styles.error}>{errorMessage}</div>
-          )}
+          {errorMessage && <div className={styles.error}>{errorMessage}</div>}
 
           <div className={styles.buttonContainer}>
             <button
@@ -140,8 +108,10 @@ export default function AuthForm({ type }) {
             >
               {isLoading ? (
                 <span className={styles.spinner}></span>
+              ) : type === "login" ? (
+                "Войти"
               ) : (
-                type === "login" ? "Войти" : "Зарегистрироваться"
+                "Зарегистрироваться"
               )}
             </button>
           </div>
@@ -150,11 +120,15 @@ export default function AuthForm({ type }) {
         <div className={styles.switchLink}>
           {type === "login" ? (
             <p>
-              Нет аккаунта? <Link to="/signup">Зарегистрироваться</Link>
+              Нет аккаунта?{" "}
+              <button onClick={() => setType("signup")}>
+                Зарегистрироваться
+              </button>
             </p>
           ) : (
             <p>
-              Уже есть аккаунт? <Link to="/login">Войти</Link>
+              Уже есть аккаунт?{" "}
+              <button onClick={() => setType("login")}>Войти</button>
             </p>
           )}
         </div>
