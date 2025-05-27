@@ -1,17 +1,20 @@
-// AuthForm.jsx
 import styles from "./AuthForm.module.css";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import cookieLogo from "/src/assets/cookie-jar-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from '../../api/client';
 
-export default function AuthForm({ type, onSubmit, errorMessage }) {
+export default function AuthForm({ type }) {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     passwordConfirmation: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +26,45 @@ export default function AuthForm({ type, onSubmit, errorMessage }) {
     formData.password.trim().length >= 6 &&
     (type === "login" || formData.password === formData.passwordConfirmation);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+    
+    setIsLoading(true);
+    setErrorMessage("");
+
+    try {
+      const endpoint = type === 'login' ? '/auth/signin' : '/auth/signup';
+      const payload = {
+        login: formData.username,
+        password: formData.password
+      };
+      
+      if (type === 'signup') {
+        payload.password_confirmation = formData.passwordConfirmation;
+      }
+
+      const response = await api.post(endpoint, payload);
+      
+      localStorage.setItem('token', response.data.token);
+      if (response.data.user_id) {
+        localStorage.setItem('userId', response.data.user_id);
+      }
+      
+      navigate('/profile'); // Перенаправляем на страницу профиля
+      
+    } catch (error) {
+      console.error('Ошибка авторизации:', error);
+      setErrorMessage(
+        error.response?.data?.error || 
+        error.response?.data?.errors?.join(', ') || 
+        'Произошла ошибка'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className={styles.outerWrapper}>
       <div className={styles.container}>
@@ -31,21 +73,18 @@ export default function AuthForm({ type, onSubmit, errorMessage }) {
           {type === "login" ? "Вход" : "Регистрация"}
         </h2>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (isFormValid) onSubmit(formData);
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <input
               name="username"
               type="text"
               placeholder="Логин (мин. 3 символа)"
               required
+              minLength={3}
               value={formData.username}
               onChange={handleChange}
               className={styles.input}
+              disabled={isLoading}
             />
           </div>
 
@@ -56,15 +95,18 @@ export default function AuthForm({ type, onSubmit, errorMessage }) {
                 type={showPassword ? "text" : "password"}
                 placeholder="Пароль (мин. 6 символов)"
                 required
+                minLength={6}
                 value={formData.password}
                 onChange={handleChange}
                 className={styles.input}
+                disabled={isLoading}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
                 className={styles.eyeButton}
                 aria-label="Показать или скрыть пароль"
+                disabled={isLoading}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -81,6 +123,7 @@ export default function AuthForm({ type, onSubmit, errorMessage }) {
                 value={formData.passwordConfirmation}
                 onChange={handleChange}
                 className={styles.input}
+                disabled={isLoading}
               />
             </div>
           )}
@@ -93,9 +136,13 @@ export default function AuthForm({ type, onSubmit, errorMessage }) {
             <button
               type="submit"
               className={styles.button}
-              disabled={!isFormValid}
+              disabled={!isFormValid || isLoading}
             >
-              {type === "login" ? "Войти" : "Зарегистрироваться"}
+              {isLoading ? (
+                <span className={styles.spinner}></span>
+              ) : (
+                type === "login" ? "Войти" : "Зарегистрироваться"
+              )}
             </button>
           </div>
         </form>
