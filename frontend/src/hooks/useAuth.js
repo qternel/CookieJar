@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { GetUser, SignIn, SignUp } from "../api/auth";
+import api from "../api/client";
 
 export const useAuth = () => {
   const {
@@ -28,6 +29,12 @@ export const useAuth = () => {
     onSuccess: () => refetchUserInfo(),
   });
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    api.defaults.headers["Authorization"] = null;
+    refetchUserInfo();
+  };
+
   return {
     signIn,
     signUp,
@@ -37,5 +44,6 @@ export const useAuth = () => {
     isLoadingSignUp,
     errorSignIn,
     errorSignUp,
+    logout,
   };
 };

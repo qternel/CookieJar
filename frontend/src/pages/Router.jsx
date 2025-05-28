@@ -2,9 +2,14 @@ import { Routes, Route } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
 import { Login, Dashboard, Profile } from ".";
 import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 
 const Router = () => {
   const { user } = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   if (!user) return <Login />;
 

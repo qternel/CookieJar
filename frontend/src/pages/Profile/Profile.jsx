@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useAchievements } from "../../hooks/useAchievements";
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { CreateAchievement, isAdding } = useAchievements();
 
   // Состояние для формы
@@ -29,6 +29,7 @@ export default function Profile() {
         <div className="bannerContent">
           <div className="avatar">🍪</div>
           <h1>{user.login}</h1>
+          <button onClick={logout}>Выйти</button>
 
           <div className="profileMeta">
             <p>

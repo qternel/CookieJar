@@ -54,8 +54,8 @@ export default function AuthForm() {
   };
 
   useEffect(() => {
-    if (type === "login" && errorSignIn) setErrorMessage(errorSignIn);
-    if (type === "signup" && errorSignUp) setErrorMessage(errorSignUp);
+    if (type === "login" && errorSignIn) setErrorMessage(errorSignIn.message);
+    if (type === "signup" && errorSignUp) setErrorMessage(errorSignUp.message);
   }, [errorSignIn, errorSignUp, type]);
 
   return (
