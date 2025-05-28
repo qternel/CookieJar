@@ -1,11 +1,8 @@
-import api from './client';
-
-export const getMyProfile = async () => {
-  const response = await api.get('/user/me');
-  return response.data;
-};
+import api from "./client";
 
 export const createAchievement = async (description) => {
-  const response = await api.post('/achievements', { achievement: { description } });
-  return response.data;
+  const { data } = await api.post("/achievements", {
+    achievement: { description },
+  });
+  return data;
 };

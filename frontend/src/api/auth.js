@@ -11,8 +11,8 @@ export const SignIn = async (login, password) => {
     },
   });
 
-  const token = localStorage.setItem("token", data.token);
-  if (token) api.defaults.headers["Authorization"] = `Bearer ${token}`;
+  localStorage.setItem("token", data.token);
+  api.defaults.headers["Autorization"] = `Bearer ${data.token}`;
 
   return data;
 };
@@ -28,8 +28,8 @@ export const SignUp = async (login, password, secondPassword) => {
     },
   });
 
-  const token = localStorage.setItem("token", data.token);
-  if (token) api.defaults.headers["Authorization"] = `Bearer ${token}`;
+  localStorage.setItem("token", data.token);
+  api.defaults.headers["Autorization"] = `Bearer ${data.token}`;
 
   return data;
 };

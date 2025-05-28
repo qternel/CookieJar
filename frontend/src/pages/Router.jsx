@@ -7,9 +7,9 @@ const Router = () => {
   const { user } = useAuth();
 
   if (!user) return <Login />;
+
   return (
     <Routes>
-      <Route path={ROUTES.signin} element={<Login />} />
       <Route path={ROUTES.dashboard} element={<Dashboard />} />
       <Route path={ROUTES.profile} element={<Profile />} />
     </Routes>
