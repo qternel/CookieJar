@@ -1725,3 +1725,2517 @@ Processing by AuthController#signup as HTML
 Completed 201 Created in 321ms (Views: 0.2ms | ActiveRecord: 12.9ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "password_digest" varchar, "achievements" text, "cookies" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login") /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35mSQL (5.8ms)[0m  [1m[35mPRAGMA foreign_keys /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aachievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aachievements_on_user_id" ON "aachievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "aachievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "achievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "achievements" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "cookie_count" integer, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_651a652e8a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_achievements_on_user_id" ON "achievements" ("user_id") /*application='CookieJar'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("id","description","cookie_count","user_id","created_at","updated_at")
+                     SELECT "id","description","cookie_count","user_id","created_at","updated_at" FROM "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "aachievements" /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='CookieJar'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='CookieJar'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250516083727) /*application='CookieJar'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250507200035); /*application='CookieJar'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-05-27 16:42:43.116892', '2025-05-27 16:42:43.116896') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '9237ec4d62d83f1cee011d7e70f0190b494abfb3', '2025-05-27 16:42:43.131456', '2025-05-27 16:42:43.131459') RETURNING "key" /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:26 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:29 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:31 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:34 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:38 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for 127.0.0.1 at 2025-05-27 22:01:51 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:56 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:57 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:01:59 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:02:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signin" for 127.0.0.1 at 2025-05-27 22:02:06 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signin"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:02:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:02:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:02:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for 127.0.0.1 at 2025-05-27 22:02:37 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:03:47 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:03:49 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:03:51 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:03:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signin" for 127.0.0.1 at 2025-05-27 22:04:04 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signin"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:04:26 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:04:27 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:04:29 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:04:33 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for 127.0.0.1 at 2025-05-27 22:04:41 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-27 22:06:25 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:06:26 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:06:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:06:33 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-27 22:06:46 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:11 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:17 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:19 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:21 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:07:25 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-27 22:07:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-27 22:14:23 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:24 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:26 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:32 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for 127.0.0.1 at 2025-05-27 22:14:34 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"123456", "password"=>"[FILTERED]", "auth"=>{"login"=>"123456", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000022652ed4e30>, params: {"login"=>"123456", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"123456", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '123456' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('123456', '$2a$12$sfC21bU/OMU8CZMT18rjmuPrOFfzX0bLM8xAd1dmrnaLb9g8IsMc2', NULL, 10, '2025-05-27 19:14:35.380421', '2025-05-27 19:14:35.380421') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 1, '2025-05-27 19:14:35.385247', '2025-05-27 19:14:35.385247') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 770ms (Views: 0.1ms | ActiveRecord: 12.8ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:35 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:36 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:38 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:14:40 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:14:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:14:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:15:21 +0300
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:21 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:15:22 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:15:24 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:15:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:43 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:50 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:15:53 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"zxczxc", "password"=>"[FILTERED]", "auth"=>{"login"=>"zxczxc", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000022652e600a8>, params: {"login"=>"zxczxc", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"zxczxc", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'zxczxc' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('zxczxc', '$2a$12$KI.CU8lK8xWQkgHlvUnuteNTE2M3fyIpsDaPLf1TaYROZakNox67C', NULL, 10, '2025-05-27 19:15:54.055353', '2025-05-27 19:15:54.055353') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 2, '2025-05-27 19:15:54.063117', '2025-05-27 19:15:54.063117') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 291ms (Views: 0.2ms | ActiveRecord: 5.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:54 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:15:57 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:16:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:16:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:16:08 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:16:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:16:14 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"zxczxc", "password"=>"[FILTERED]", "auth"=>{"login"=>"zxczxc", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000022651dd4068>, params: {"login"=>"zxczxc", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"zxczxc", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'zxczxc' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 310ms (Views: 0.1ms | ActiveRecord: 4.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:17:03 +0300
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:19:27 +0300
+Started GET "/user/me" for ::1 at 2025-05-27 22:19:27 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  
+ActionController::RoutingError (No route matches [POST] "/auth/signup"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/user/me"):
+  
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:19:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:19:55 +0300
+Started GET "/user/me" for ::1 at 2025-05-27 22:19:55 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/user/me"):
+  
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:19:57 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:19:59 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:02 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:20:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:20:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:20:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:20:27 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"qweqwe", "password"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000179ae181e00>, params: {"login"=>"qweqwe", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('qweqwe', '$2a$12$Xi5NoxbrcumObmclI65o8.Ah/GAwWjjU3Kb8dU0avjHOT1a9fHHSu', NULL, 10, '2025-05-27 19:20:28.044812', '2025-05-27 19:20:28.044812') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 3, '2025-05-27 19:20:28.048937', '2025-05-27 19:20:28.048937') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 357ms (Views: 0.1ms | ActiveRecord: 11.3ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:29 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:31 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:20:35 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:21:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:21:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:21:43 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:21:45 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-27 22:21:48 +0300
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}, "auth"=>{"login"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+TypeError (can't quote ActionController::Parameters):
+  
+app/controllers/auth_controller.rb:17:in `signin'
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:21:50 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:22:23 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:22:24 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:29 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:30 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:32 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:36 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:45 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:48 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:22:53 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:23:00 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"yuiyui", "password"=>"[FILTERED]", "auth"=>{"login"=>"yuiyui", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000179ae44a5b0>, params: {"login"=>"yuiyui", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"yuiyui", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (5.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'yuiyui' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('yuiyui', '$2a$12$hroJlU/leFmjlfvc.DwQEu9cW1wfxnvcUWLKmLQj1a/rF8O6CXTRy', NULL, 10, '2025-05-27 19:23:01.291742', '2025-05-27 19:23:01.291742') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 4, '2025-05-27 19:23:01.299762', '2025-05-27 19:23:01.299762') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 319ms (Views: 0.2ms | ActiveRecord: 6.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:23:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:23:02 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:23:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:23:08 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-27 22:23:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:24:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:24:13 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 9ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:11 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:13 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:15 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:18 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:26:22 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:26:23 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"qweqwe", "password"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x0000027ba1d750b8>, params: {"login"=>"qweqwe", "password"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 406ms (Views: 0.1ms | ActiveRecord: 8.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:28:38 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 21ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:28:40 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:28:41 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 8ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:28:43 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 11ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:28:48 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 9ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:28:49 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef2f04ba8>, params: {"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (13.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 481ms (Views: 0.2ms | ActiveRecord: 24.4ms (1 query, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:30:13 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"example_user123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"example_user123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef2b6ca90>, params: {"login"=>"example_user123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"example_user123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (5.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'example_user123' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('example_user123', '$2a$12$jrgkv9lIDCkgJfmV78zkd.Zk3n7pUez.lm4zizSf47R2XrpUaLgBa', NULL, 10, '2025-05-27 19:30:53.674650', '2025-05-27 19:30:53.674650') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 5, '2025-05-27 19:30:53.679530', '2025-05-27 19:30:53.679530') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 334ms (Views: 0.1ms | ActiveRecord: 9.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:31:16 +0300
+Processing by UsersController#me as */*
+  Parameters: {"login"=>"example_user123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"login"=>"example_user123"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 5 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:32:26 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef168bae0>, params: {"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (8.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 311ms (Views: 0.2ms | ActiveRecord: 8.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:32:40 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:32:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:32:44 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:32:46 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eeee01ecf0>, params: {"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (17.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe123' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('qweqwe123', '$2a$12$7qYJ.eA/iLO7.5Ka5MT5ye9aPLeEqK/O03Z0qECaAFeXCxjVGg6bu', NULL, 10, '2025-05-27 19:32:46.652076', '2025-05-27 19:32:46.652076') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 6, '2025-05-27 19:32:46.656893', '2025-05-27 19:32:46.656893') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 340ms (Views: 0.1ms | ActiveRecord: 17.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:32:48 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:33:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:33:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 1.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:33:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-27 22:33:13 +0300
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"qweqwe123", "password"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe123", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = 'qweqwe123' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 200 OK in 291ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:33:16 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:34:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:34:40 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:34:42 +0300
+Started GET "/user/me" for ::1 at 2025-05-27 22:34:42 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef05750a8>, params: {"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (7.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe123' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 383ms (Views: 0.2ms | ActiveRecord: 7.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:34:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:34:53 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"qweqwe1234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe1234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef1e1bb98>, params: {"login"=>"qweqwe1234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe1234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (8.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe1234' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('qweqwe1234', '$2a$12$tChX01Os6LKBAR4lVf5Egev0jOnz/MnzybuWgfB6z7pkJ02ywOtjS', NULL, 10, '2025-05-27 19:34:54.158297', '2025-05-27 19:34:54.158297') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.3ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 7, '2025-05-27 19:34:54.167943', '2025-05-27 19:34:54.167943') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 490ms (Views: 0.1ms | ActiveRecord: 9.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/achievements" for ::1 at 2025-05-27 22:35:22 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"description"=>"cool achievement", "achievement"=>{"description"=>"cool achievement"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "cookies" = 30 WHERE "users"."id" = 7 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mAchievement Create (4.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('cool achievement', 20, 7, '2025-05-27 19:35:23.353319', '2025-05-27 19:35:23.353319') RETURNING "id" /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+Completed 201 Created in 28ms (Views: 1.5ms | ActiveRecord: 4.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/achievements" for ::1 at 2025-05-27 22:35:26 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"description"=>"cool achievement 2", "achievement"=>{"description"=>"cool achievement 2"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "cookies" = 47 WHERE "users"."id" = 7 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mAchievement Create (4.7ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('cool achievement 2', 17, 7, '2025-05-27 19:35:26.828829', '2025-05-27 19:35:26.828829') RETURNING "id" /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+Completed 201 Created in 26ms (Views: 2.7ms | ActiveRecord: 5.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:35:37 +0300
+Processing by UsersController#me as */*
+  Parameters: {"description"=>"cool achievement 2", "user"=>{}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.3ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 7 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:36:17 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:36:24 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-27 22:36:36 +0300
+Processing by AuthController#signup as */*
+  Parameters: {"login"=>"qweqwe12234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"qweqwe12234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002eef0377440>, params: {"login"=>"qweqwe12234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"qweqwe12234", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (7.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'qweqwe12234' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('qweqwe12234', '$2a$12$x3lNla4NqJI6UP4X.AvzJO5TA1Q27lygYJbwgkRnVUttkPnbmrZMK', NULL, 10, '2025-05-27 19:36:36.735444', '2025-05-27 19:36:36.735444') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 8, '2025-05-27 19:36:36.740778', '2025-05-27 19:36:36.740778') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 380ms (Views: 0.3ms | ActiveRecord: 8.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:36:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:36:44 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:37:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/achievements" for ::1 at 2025-05-27 22:37:06 +0300
+Processing by AchievementsController#create as */*
+  Parameters: {"description"=>"cool achievement", "achievement"=>{"description"=>"cool achievement"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 8 LIMIT 1 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "cookies" = 17 WHERE "users"."id" = 8 /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:7:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mAchievement Create (7.7ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('cool achievement', 7, 8, '2025-05-27 19:37:06.806762', '2025-05-27 19:37:06.806762') RETURNING "id" /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='CookieJar',controller='achievements'*/[0m
+  ↳ app/controllers/achievements_controller.rb:8:in `create'
+Completed 201 Created in 43ms (Views: 1.2ms | ActiveRecord: 8.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:37:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:37:17 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-27 22:38:18 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:39:59 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:00 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:02 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for 127.0.0.1 at 2025-05-28 14:40:06 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"hahaha", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"hahaha", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000001cc78eef3e0>, params: {"login"=>"hahaha", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"hahaha", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (7.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = 'hahaha' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('hahaha', '$2a$12$5gHwJfMJousr0nRzUPVkveWKmKNotaOEDcvY7zGwYco.rPFlr13By', NULL, 10, '2025-05-28 11:40:07.012603', '2025-05-28 11:40:07.012603') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 9, '2025-05-28 11:40:07.022862', '2025-05-28 11:40:07.022862') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 441ms (Views: 0.2ms | ActiveRecord: 14.7ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:08 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:40:35 +0300
+Started POST "/auth/signin" for 127.0.0.1 at 2025-05-28 14:41:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"hahaha", "password"=>"[FILTERED]", "auth"=>{"login"=>"hahaha", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = 'hahaha' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 200 OK in 291ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:41:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:41:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:18 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:19 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:21 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:26 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:41:36 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"000000", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"000000", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000001cc7576dc00>, params: {"login"=>"000000", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"000000", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (15.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '000000' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('000000', '$2a$12$7I9c25F03Js4V9zxhtwQ/em22UmhJ9B6P2ZTK8P6zUrZa9NVRZnZa', NULL, 10, '2025-05-28 11:41:36.602215', '2025-05-28 11:41:36.602215') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 10, '2025-05-28 11:41:36.607901', '2025-05-28 11:41:36.607901') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 313ms (Views: 0.2ms | ActiveRecord: 16.2ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:36 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:37 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:44 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:41:49 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/favicon.ico" for ::1 at 2025-05-28 14:41:50 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:51 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:52 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:54 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:41:58 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:42:31 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:42:35 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:42:54 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:42:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:42:56 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:42:56 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:42:58 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:42:58 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:43:02 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:43:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:43:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:43:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:08 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:43:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:20 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:21 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:23 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:27 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-28 14:43:27 +0300
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"000000", "password"=>"[FILTERED]", "auth"=>{"login"=>"000000", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = '000000' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 200 OK in 287ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:53 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:43:57 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:44:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:44:04 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"1111111", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"1111111", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000001cc793614a0>, params: {"login"=>"1111111", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"1111111", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '1111111' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('1111111', '$2a$12$aLk9n.Z/TGsMDtfLuAXEOu5aKEbLlQ7poxlt9qDid6Sr6aW1Qdn56', NULL, 10, '2025-05-28 11:44:05.231468', '2025-05-28 11:44:05.231468') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 11, '2025-05-28 11:44:05.237034', '2025-05-28 11:44:05.237034') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 299ms (Views: 0.2ms | ActiveRecord: 4.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:44:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:44:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:44:08 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:44:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:45:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:45:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:24 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:25 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:27 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:31 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:33 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:34 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:36 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:40 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:46:41 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"222222", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"222222", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000214405ecd00>, params: {"login"=>"222222", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"222222", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (9.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '222222' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('222222', '$2a$12$Pe8miCfhsNCorcmJgeuRiOQB/rcCNY1XLxLtnQbhbhPYzM.kuQzrm', NULL, 10, '2025-05-28 11:46:41.971255', '2025-05-28 11:46:41.971255') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 12, '2025-05-28 11:46:41.976228', '2025-05-28 11:46:41.976228') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 436ms (Views: 0.1ms | ActiveRecord: 17.1ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:43 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:45 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:46:49 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:47:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:47:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:09 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-28 14:47:14 +0300
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"222222", "password"=>"[FILTERED]", "auth"=>{"login"=>"222222", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = '222222' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 200 OK in 278ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:17 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:47:33 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:47:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:45 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:47:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:48 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:47:51 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002143fe26918>, params: {"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (5.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '333333' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('333333', '$2a$12$BMhcE5mdVAkzECu7clqUMOzmXqNI3T9gjvsY4sZ5/JhFqGw0qDYV2', NULL, 10, '2025-05-28 11:47:51.885215', '2025-05-28 11:47:51.885215') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.2ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 13, '2025-05-28 11:47:51.891032', '2025-05-28 11:47:51.891032') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 343ms (Views: 0.2ms | ActiveRecord: 6.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:52 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:47:54 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:47:56 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:48:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:48:15 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:48:32 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:48:34 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:48:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-28 14:48:41 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:48:44 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:32 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:33 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:49:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:49:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:49:54 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:49:55 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:49:56 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:49:57 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:50:10 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:50:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:50:13 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:50:16 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:50:17 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:50:19 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:50:20 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x00000214417a2310>, params: {"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"333333", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '333333' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Content in 293ms (Views: 0.1ms | ActiveRecord: 4.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:50:23 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/signup" for ::1 at 2025-05-28 14:50:33 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/signup"):
+  
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:50:46 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:00 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:01 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:03 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:07 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signin" for ::1 at 2025-05-28 14:52:08 +0300
+Processing by AuthController#signin as HTML
+  Parameters: {"login"=>"333333", "password"=>"[FILTERED]", "auth"=>{"login"=>"333333", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = '333333' LIMIT 1 /*action='signin',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `signin'
+Completed 200 OK in 282ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:26 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:27 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:30 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:41 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:44 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:52:49 +0300
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:52:49 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:54:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:54:05 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:54:23 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/signup" for ::1 at 2025-05-28 14:54:30 +0300
+Processing by AuthController#signup as HTML
+  Parameters: {"login"=>"444444", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "auth"=>{"login"=>"444444", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :auth. Context: { controller: AuthController, action: signup, request: #<ActionDispatch::Request:0x000002144172f158>, params: {"login"=>"444444", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"auth", "action"=>"signup", "auth"=>{"login"=>"444444", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (4.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = '444444' LIMIT 1 /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "password_digest", "achievements", "cookies", "created_at", "updated_at") VALUES ('444444', '$2a$12$vng6b4h5ao1Lm2539pxWv.BhNtdyd1q/NIsR9FWzRKiWa1DF8omja', NULL, 10, '2025-05-28 11:54:31.051343', '2025-05-28 11:54:31.051343') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mAchievement Create (0.1ms)[0m  [1m[32mINSERT INTO "achievements" ("description", "cookie_count", "user_id", "created_at", "updated_at") VALUES ('Registered!', 10, 14, '2025-05-28 11:54:31.055854', '2025-05-28 11:54:31.055854') RETURNING "id" /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='signup',application='CookieJar',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:8:in `signup'
+Completed 201 Created in 319ms (Views: 0.1ms | ActiveRecord: 4.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:31 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:32 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:34 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:38 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:39 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:41 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:42 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:54:44 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:54:45 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:55:02 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:56:14 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 14:56:28 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:57:12 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:57:13 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:57:15 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:57:19 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:57:47 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:58:04 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:58:06 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:58:35 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:59:13 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 14:59:15 +0300
+Processing by UsersController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:14 +0300
+Started POST "/auth/signup" for ::1 at 2025-05-28 15:07:14 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CookieJar'*/[0m
+  
+ActionController::RoutingError (No route matches [POST] "/auth/signup"):
+  
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 401ms (Views: 0.4ms | ActiveRecord: 4.0ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:21 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:21 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:32 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:32 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.3ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:46 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:46 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (1.0ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:07:55 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:07:55 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:58 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:07:58 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:07:59 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 15ms (Views: 7.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:08:00 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:08:01 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:08:16 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:08:34 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:00 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:00 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:02 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:02 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 11ms (Views: 3.4ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:02 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.4ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:03 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:03 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:03 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:04 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (1.5ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 22ms (Views: 0.3ms | ActiveRecord: 1.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:04 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:04 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:04 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.5ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:04 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:05 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:43 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:09:44 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 25ms (Views: 0.1ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:09:46 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.1ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/user/me" for ::1 at 2025-05-28 15:09:52 +0300
+Started GET "/user/me" for 127.0.0.1 at 2025-05-28 15:09:52 +0300
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 14 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.3ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 14 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by UsersController#me as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 9 LIMIT 1 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/application_controller.rb:22:in `authorize_request'
+  [1m[36mAchievement Load (0.2ms)[0m  [1m[34mSELECT "achievements".* FROM "achievements" WHERE "achievements"."user_id" = 9 /*action='me',application='CookieJar',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:5:in `me'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

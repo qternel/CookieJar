@@ -12,7 +12,7 @@ export const SignIn = async (login, password) => {
   });
 
   localStorage.setItem("token", data.token);
-  api.defaults.headers["Autorization"] = `Bearer ${data.token}`;
+  api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
 
   return data;
 };
@@ -29,7 +29,7 @@ export const SignUp = async (login, password, secondPassword) => {
   });
 
   localStorage.setItem("token", data.token);
-  api.defaults.headers["Autorization"] = `Bearer ${data.token}`;
+  api.defaults.headers["Authorization"] = `Bearer ${data.token}`;
 
   return data;
 };
