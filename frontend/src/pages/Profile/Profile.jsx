@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./Profile.css";
 import { useAuth } from "../../hooks/useAuth";
-import { useAchivements } from "../../hooks/useAchivements";
+import { useAchievements } from "../../hooks/useAchievements";
 
 export default function Profile() {
   const { user } = useAuth();
-  const { CreateAchievement, isAdding } = useAchivements();
+  const { CreateAchievement, isAdding } = useAchievements();
 
   // Состояние для формы
   const [newAchievement, setNewAchievement] = useState("");
