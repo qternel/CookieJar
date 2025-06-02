@@ -20,18 +20,25 @@ export const useAuth = () => {
     mutationKey: ["sign up"],
     mutationFn: ({ login, password, secondPassword }) =>
       SignUp(login, password, secondPassword),
-    onSuccess: () => refetchUserInfo(),
+    onSuccess: () =>
+      setTimeout(() => {
+        refetchUserInfo();
+      }, 200),
   });
 
   const { data: user, refetch: refetchUserInfo } = useQuery({
     queryKey: ["user"],
     queryFn: () => GetUser(),
-    onSuccess: () => refetchUserInfo(),
+    onSuccess: () =>
+      setTimeout(() => {
+        refetchUserInfo();
+      }, 200),
   });
 
   const logout = () => {
     localStorage.removeItem("token");
     api.defaults.headers["Authorization"] = null;
+    location.reload();
     refetchUserInfo();
   };
 
