@@ -46,12 +46,6 @@ export default function Profile() {
           <h1>{user.login}</h1>
           <button onClick={logout}>Выйти</button>
 
-          <div className="profileMeta">
-            <p>
-              Зарегистрирован: {formatDate(user.create_at)}
-            </p>
-          </div>
-
           <div className="stats">
             <div className="stat">
               <span className="statNumber">{user.cookies}</span>
@@ -111,7 +105,7 @@ export default function Profile() {
                     <div className="achievementEmoji">🏆</div>
                     <div className="achievementText">
                       <h3>{achievement.description}</h3>
-                      <p>Получено: {achievement.date ? formatDate(achievement.date) : 'Дата не указана'}</p>
+                      <p>Получено {achievement.cookie_count} печенек</p>
                     </div>
                   </div>
                 ))
