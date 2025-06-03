@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
-import { Login, Dashboard, Profile } from ".";
+import { Login, Profile } from ".";
 import { useAuth } from "../hooks/useAuth";
 import { useEffect } from "react";
 
@@ -15,7 +15,6 @@ const Router = () => {
 
   return (
     <Routes>
-      <Route path={ROUTES.dashboard} element={<Dashboard />} />
       <Route path={ROUTES.profile} element={<Profile />} />
     </Routes>
   );

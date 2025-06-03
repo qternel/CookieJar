@@ -3,6 +3,21 @@ import "./Profile.css";
 import { useAuth } from "../../hooks/useAuth";
 import { useAchievements } from "../../hooks/useAchievements";
 
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('ru-RU', 
+    {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    // hour: '2-digit',
+    // minute: '2-digit'
+  });
+};
+
+
+
 export default function Profile() {
   const { user, logout } = useAuth();
   const { CreateAchievement, isAdding } = useAchievements();
@@ -33,7 +48,7 @@ export default function Profile() {
 
           <div className="profileMeta">
             <p>
-              Зарегистрирован: {new Date(user.create_at).toLocaleDateString()}
+              Зарегистрирован: {formatDate(user.create_at)}
             </p>
           </div>
 
@@ -96,7 +111,7 @@ export default function Profile() {
                     <div className="achievementEmoji">🏆</div>
                     <div className="achievementText">
                       <h3>{achievement.description}</h3>
-                      <p>Получено: {achievement.date}</p>
+                      <p>Получено: {achievement.date ? formatDate(achievement.date) : 'Дата не указана'}</p>
                     </div>
                   </div>
                 ))

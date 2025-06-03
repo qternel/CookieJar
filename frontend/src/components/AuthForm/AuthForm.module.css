@@ -145,3 +145,20 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+
+.switchLink button {
+  background: none;
+  border: none;
+  color: #d0a76c;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0;
+  margin-left: 0.3rem;
+}
+
+.switchLink button:hover {
+  color: #f3e5ab;
+  text-decoration: none;
+}
